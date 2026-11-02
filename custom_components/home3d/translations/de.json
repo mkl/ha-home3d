@@ -1,0 +1,89 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Wo dein Modell veröffentlicht wird",
+        "description": "Das GitHub-Repository, dessen Releases die Modellpakete deines Zuhauses tragen (`home3d-model-HOME-VERSION.zip`), und ein Token, das es lesen darf. Für ein privates Repository: ein fein granuliertes Token nur für dieses Repository mit der Berechtigung Contents: read-only.",
+        "data": {
+          "repository": "Repository (owner/name oder seine GitHub-URL)",
+          "token": "GitHub-Token"
+        }
+      },
+      "home": {
+        "title": "Welches Zuhause",
+        "description": "Modellpakete in {repository}.",
+        "data": {
+          "home": "Zuhause",
+          "title": "Titel in der Seitenleiste (sonst der des Modells)",
+          "icon": "Symbol in der Seitenleiste"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Neues GitHub-Token",
+        "description": "GitHub nimmt das Token für {repository} nicht mehr an. Gib ein neues mit Lesezugriff darauf an.",
+        "data": {
+          "token": "GitHub-Token"
+        }
+      }
+    },
+    "progress": {
+      "download": "Modell {version} wird geladen. Bei einem großen Modell kann das eine Minute dauern."
+    },
+    "error": {
+      "invalid_repository": "Gib das Repository als owner/name oder als GitHub-URL an.",
+      "invalid_auth": "GitHub lehnt das Token ab, oder es darf dieses Repository nicht lesen.",
+      "cannot_connect": "GitHub ist nicht erreichbar.",
+      "no_models": "Kein Release dieses Repositorys trägt ein Modellpaket (`home3d-model-HOME-VERSION.zip`).",
+      "path_taken": "Der Pfad dieses Zuhauses in der Seitenleiste gehört schon einer anderen Ansicht; benenne das Zuhause im Modellpaket um."
+    },
+    "abort": {
+      "already_configured": "Dieses Zuhause ist schon hinzugefügt.",
+      "all_added": "Alle Zuhause dieses Repositorys sind schon hinzugefügt.",
+      "download_failed": "Das Modell ließ sich nicht installieren: {error}",
+      "reauth_successful": "Das neue Token funktioniert.",
+      "already_in_progress": "Dieses Zuhause wird gerade schon hinzugefügt.",
+      "unknown": "Unerwarteter Fehler, siehe Protokoll."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Lampen und Räume",
+        "description": "Welches Licht jede Lampe des Modells ist und welcher Bereich jeder Raum. So belassen, gilt die Zuordnung des Modells, auch nach einem Update.",
+        "data": {
+          "icon": "Symbol in der Seitenleiste"
+        },
+        "sections": {
+          "lamps": {
+            "name": "Lampen",
+            "description": "Das Licht, das jede Lampe zeigt und schaltet."
+          },
+          "rooms": {
+            "name": "Räume",
+            "description": "Die Bereiche, deren Temperatur und Feuchte jeder Raum zeigt."
+          }
+        }
+      }
+    },
+    "abort": {
+      "no_model": "Für dieses Zuhause ist noch kein Modell installiert."
+    }
+  },
+  "entity": {
+    "update": {
+      "model": {
+        "name": "Modell"
+      }
+    }
+  },
+  "issues": {
+    "model_missing": {
+      "title": "{home}: kein Modell installiert",
+      "description": "Home 3D konnte das Modell für {home} nicht laden: {error}. Es versucht es bei jeder Prüfung (alle sechs Stunden) und bei jedem Start erneut. Prüfe, ob das Repository noch ein Modellpaket für dieses Zuhause hat und das Token es lesen darf."
+    },
+    "check_failing": {
+      "title": "{home}: Updates seit einem Tag nicht geprüft",
+      "description": "Home 3D hat {repository} seit über einem Tag nicht erreicht ({error}). Das installierte Modell funktioniert weiter; neuere erscheinen, sobald das Repository wieder erreichbar ist."
+    }
+  }
+}

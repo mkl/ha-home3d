@@ -1,0 +1,89 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Where your model is released",
+        "description": "The GitHub repository whose releases carry your home's model packages (`home3d-model-HOME-VERSION.zip`), and a token that may read it. For a private repository: a fine-grained token with access to that repository only and the permission Contents: read-only.",
+        "data": {
+          "repository": "Repository (owner/name or its GitHub URL)",
+          "token": "GitHub token"
+        }
+      },
+      "home": {
+        "title": "Which home",
+        "description": "Model packages found in {repository}.",
+        "data": {
+          "home": "Home",
+          "title": "Sidebar title (default: the model's own)",
+          "icon": "Sidebar icon"
+        }
+      },
+      "reauth_confirm": {
+        "title": "New GitHub token",
+        "description": "GitHub no longer accepts the token for {repository}. Give a new one with read access to it.",
+        "data": {
+          "token": "GitHub token"
+        }
+      }
+    },
+    "progress": {
+      "download": "Downloading model {version}. This can take a minute for a large model."
+    },
+    "error": {
+      "invalid_repository": "Give the repository as owner/name or as its GitHub URL.",
+      "invalid_auth": "GitHub refused the token, or the token can't read this repository.",
+      "cannot_connect": "GitHub could not be reached.",
+      "no_models": "No release of this repository carries a model package (`home3d-model-HOME-VERSION.zip`).",
+      "path_taken": "The sidebar path of this home is used by another panel; rename the home in its model package."
+    },
+    "abort": {
+      "already_configured": "This home is already added.",
+      "all_added": "Every home in this repository is already added.",
+      "download_failed": "The model could not be installed: {error}",
+      "reauth_successful": "The new token works.",
+      "already_in_progress": "This home is already being added.",
+      "unknown": "Unexpected error, see the log."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Lamps and rooms",
+        "description": "Which light is each lamp of the model, and which area each room. Left as suggested, the model's own mapping applies, also after it updates.",
+        "data": {
+          "icon": "Sidebar icon"
+        },
+        "sections": {
+          "lamps": {
+            "name": "Lamps",
+            "description": "The light each lamp shows and switches."
+          },
+          "rooms": {
+            "name": "Rooms",
+            "description": "The areas whose temperature and humidity each room shows."
+          }
+        }
+      }
+    },
+    "abort": {
+      "no_model": "No model is installed for this home yet."
+    }
+  },
+  "entity": {
+    "update": {
+      "model": {
+        "name": "Model"
+      }
+    }
+  },
+  "issues": {
+    "model_missing": {
+      "title": "{home}: no model installed",
+      "description": "Home 3D could not download the model for {home}: {error}. It tries again at every check (every six hours) and at every start. Check that the repository still has a model package for this home and that the token can read it."
+    },
+    "check_failing": {
+      "title": "{home}: updates not checked for a day",
+      "description": "Home 3D has not reached {repository} for over a day ({error}). The installed model keeps working; newer ones appear once the repository can be reached again."
+    }
+  }
+}

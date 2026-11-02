@@ -1,0 +1,13 @@
+{
+  "domain": "home3d",
+  "name": "Home 3D",
+  "codeowners": ["@mkl"],
+  "config_flow": true,
+  "dependencies": ["http", "frontend", "panel_custom"],
+  "documentation": "https://github.com/mkl/ha-home3d",
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/mkl/ha-home3d/issues",
+  "requirements": [],
+  "version": "0.1.0"
+}
