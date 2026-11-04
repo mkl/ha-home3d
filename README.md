@@ -61,6 +61,12 @@ release rights to yourself. The token Home 3D uses only reads.
 See [docs/model-package.md](docs/model-package.md): a zip `home3d-model-<home>-<version>.zip` with `home.json` and `site/`,
 attached to a release of your repository.
 
+## Releasing
+
+Raise `version` in `custom_components/home3d/manifest.json` and push to `main`. Once `validate` passes, the `release`
+workflow tags it `v<version>` and publishes the release, which the Marketplace then offers as the update. A push
+that leaves the version alone releases nothing.
+
 ## License
 
 [MIT](LICENSE)

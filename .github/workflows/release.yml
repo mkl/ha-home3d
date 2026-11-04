@@ -1,0 +1,45 @@
+# A release for every new version: after `validate` passes on a push to main, the version in manifest.json is tagged
+# v<version> and published as a release (notes from the commits since the last one), unless that tag exists already.
+# To release: raise "version" in custom_components/home3d/manifest.json and push to main. The Marketplace offers the
+# newest release as the update.
+name: release
+
+on:
+  workflow_run:
+    workflows: [validate]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+      - name: Release the manifest's version if it is new
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
+        run: |
+          set -euo pipefail
+          version=$(jq -r .version custom_components/home3d/manifest.json)
+          [[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || { echo "::error::manifest version '$version' is not x.y.z"; exit 1; }
+          tag="v$version"
+          if gh release view "$tag" -R "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "$tag is released already; nothing to do"
+            exit 0
+          fi
+          gh release create "$tag" -R "$GITHUB_REPOSITORY" --target "$SHA" --title "$version" --generate-notes
+          echo "released $tag at $SHA"
